@@ -1,0 +1,6 @@
+-r requirements.txt
+xlwt
+invoke
+twine
+wheel
+zest.releaser
