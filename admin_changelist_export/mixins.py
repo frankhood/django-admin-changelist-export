@@ -3,7 +3,7 @@ import logging
 import django
 from django.utils import formats, timezone
 from django.views import View
-from drf_renderer_xlsx.renderers import XLSXRenderer
+from drf_excel.renderers import XLSXRenderer
 from rest_framework import generics, serializers
 from rest_framework.utils import model_meta
 from rest_framework_csv import renderers as csv_renderers
