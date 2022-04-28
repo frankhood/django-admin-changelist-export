@@ -31,7 +31,7 @@ Add it to your `INSTALLED_APPS`:
 
     INSTALLED_APPS = (
         ...
-        'admin_changelist_export.apps.AdminChangelistExportConfig',
+        'admin_changelist_export',
         ...
     )
 

@@ -1,4 +1,4 @@
 django>=2.2
 djangorestframework>=3
 djangorestframework-csv
-drf-renderer-xlsx
+drf-excel

@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
-from drf_renderer_xlsx.mixins import XLSXFileMixin
-from drf_renderer_xlsx.renderers import XLSXRenderer
+from drf_excel.mixins import XLSXFileMixin
+from drf_excel.renderers import XLSXRenderer
 from rest_framework import generics
 from rest_framework_csv import renderers as csv_renderers
 
