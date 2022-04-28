@@ -6,10 +6,9 @@ from django.views import View
 from drf_renderer_xlsx.renderers import XLSXRenderer
 from rest_framework import generics, serializers
 from rest_framework.utils import model_meta
-
-from .csv_utils import APIFileNameMixin
 from rest_framework_csv import renderers as csv_renderers
 
+from .csv_utils import APIFileNameMixin
 from .renderers import XLSRenderer
 
 logger = logging.getLogger(__name__)
@@ -198,9 +197,7 @@ class ChangelistExporterModelAdminMixin(object):
 
             def get_renderer_context(self):
                 context = super().get_renderer_context()
-                context.update({
-                    'labels': dict(self.custom_headers)
-                })
+                context.update({"labels": dict(self.custom_headers)})
                 return context
 
         return DefaultCSVExporterView
@@ -210,6 +207,7 @@ class ChangelistExporterModelAdminMixin(object):
         xls_exporter_view = self.xls_exporter_view
         if xls_exporter_view is not None:
             return xls_exporter_view
+
         class _AdminXLSRenderer(XLSRenderer):
             custom_headers = [
                 (x, str(self.get_csv_field_label(x)))
@@ -227,7 +225,6 @@ class ChangelistExporterModelAdminMixin(object):
         xlsx_exporter_view = self.xlsx_exporter_view
         if xlsx_exporter_view is not None:
             return xlsx_exporter_view
-        print('obada')
         DefaultXLSExporterView = self.get_csv_exporter_view()
         DefaultXLSExporterView.renderer_classes = (XLSXRenderer,)
         DefaultXLSExporterView.file_name = self.get_xlsx_filename()

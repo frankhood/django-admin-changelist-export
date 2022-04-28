@@ -10,12 +10,10 @@ class CustomExtraFieldSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Group
-        fields = (
-            "name",
-        )
+        fields = ("name",)
 
     def get_name(self, obj):
-        return obj in self.context.get('user').groups.all()
+        return obj in self.context.get("user").groups.all()
 
 
 class UserExportSerializer(serializers.ModelSerializer):
@@ -23,15 +21,12 @@ class UserExportSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = (
-            "last_name",
-            "username",
-            "first_name",
-            "groups"
-        )
+        fields = ("last_name", "username", "first_name", "groups")
 
     def get_groups(self, obj):
-        return CustomExtraFieldSerializer(Group.objects.all(), many=True, context={'user': obj}).data
+        return CustomExtraFieldSerializer(
+            Group.objects.all(), many=True, context={"user": obj}
+        ).data
 
     @staticmethod
     def get_headers_labels():
@@ -42,7 +37,7 @@ class UserExportSerializer(serializers.ModelSerializer):
             **{
                 f"groups.{index}.name": group.name
                 for index, group in enumerate(Group.objects.all())
-            }
+            },
         }
         return base_fields
 

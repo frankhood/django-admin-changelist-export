@@ -35,23 +35,27 @@ Add it to your `INSTALLED_APPS`:
         ...
     )
 
-Add Django Admin Changelist Export's URL patterns:
+Add ChangelistExporterModelAdminMixin to your Admin, with actions and views (if you need a custom export):
 
 .. code-block:: python
 
-    from admin_changelist_export import urls as admin_changelist_export_urls
+    class CustomUserAdmin(ChangelistExporterModelAdminMixin, DjangoUserAdmin):
+    actions = ["export_data_in_csv", "export_data_in_xls", "export_data_in_xlsx"]
+    csv_exporter_view = UserCSVExporterView
+    xls_exporter_view = UserXLSExporterView
+    xlsx_exporter_view = UserXLSXExporterView
 
 
-    urlpatterns = [
-        ...
-        url(r'^', include(admin_changelist_export_urls)),
-        ...
-    ]
+    admin.site.unregister(get_user_model())
+    admin.site.register(get_user_model(), CustomUserAdmin)
+
+You can only add the mixin if you need only to download "AS-IS" changelist admin columns
 
 Features
 --------
 
-* TODO
+* Can easily download changelist fields in .csv, .xls and .xlsx extensions.
+* Can add to an admin model views to customize its download.
 
 Running Tests
 -------------

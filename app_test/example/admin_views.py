@@ -1,11 +1,12 @@
 from django.contrib.auth import get_user_model
+from drf_renderer_xlsx.mixins import XLSXFileMixin
 from drf_renderer_xlsx.renderers import XLSXRenderer
 from rest_framework import generics
 from rest_framework_csv import renderers as csv_renderers
-from drf_renderer_xlsx.mixins import XLSXFileMixin
+
 from admin_changelist_export.csv_utils import APIFileNameMixin
 from admin_changelist_export.renderers import XLSRenderer
-from tests.example.serializers import UserExportSerializer
+from app_test.example.serializers import UserExportSerializer
 
 
 class UserXLSXExporterView(APIFileNameMixin, XLSXFileMixin, generics.ListAPIView):
@@ -40,9 +41,7 @@ class UserXLSExporterView(APIFileNameMixin, generics.ListAPIView):
 
     def get_renderer_context(self):
         context = super().get_renderer_context()
-        context.update({
-            'labels': self.serializer_class.get_headers_labels()
-        })
+        context.update({"labels": self.serializer_class.get_headers_labels()})
         return context
 
 
@@ -61,7 +60,5 @@ class UserCSVExporterView(APIFileNameMixin, generics.ListAPIView):
 
     def get_renderer_context(self):
         context = super().get_renderer_context()
-        context.update({
-            'labels': self.serializer_class.get_headers_labels()
-        })
+        context.update({"labels": self.serializer_class.get_headers_labels()})
         return context
