@@ -3,6 +3,13 @@
 History
 -------
 
+0.1.5 (2023-10-20)
+++++++++++++++++++
+
+* Fix setup.cfg
+* Added compatibility test for Django minor version 5
+
+
 0.1.4 (2022-04-27)
 ++++++++++++++++++
 
