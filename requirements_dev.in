@@ -8,8 +8,3 @@ coverage
 tox
 pip-tools~=5.5.0
 xlwt
-djangorestframework>=3
-djangorestframework-csv
-drf-excel
-
-Django>2.2

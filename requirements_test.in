@@ -5,7 +5,6 @@ flake8~=3.0
 tox>=1.7.0
 filelock<=3.4.1
 codecov>=2.0.0
-django>=2.2
 click<=8.0.4
 platformdirs<=2.4.0
 pyparsing<=3.0.7

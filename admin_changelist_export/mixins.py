@@ -20,7 +20,7 @@ __all__ = [
 ]
 
 
-class ChangelistExporterModelAdminMixin(object):
+class ChangelistExporterModelAdminMixin:
     """
     Add actions to your admin for exporting changelist in csv, xls and xlsx format.
 
@@ -44,17 +44,17 @@ class ChangelistExporterModelAdminMixin(object):
     csv_quotechar = '"'
 
     def get_csv_filename(self):
-        return self.csv_filename or "{0}_export_{1}.csv".format(
+        return self.csv_filename or "{}_export_{}.csv".format(
             self.model.__name__.lower(), formats.date_format(timezone.now(), "Ymd_Hi")
         )
 
     def get_xls_filename(self):
-        return self.xls_filename or "{0}_export_{1}.xls".format(
+        return self.xls_filename or "{}_export_{}.xls".format(
             self.model.__name__.lower(), formats.date_format(timezone.now(), "Ymd_Hi")
         )
 
     def get_xlsx_filename(self):
-        return self.xlsx_filename or "{0}_export_{1}.xlsx".format(
+        return self.xlsx_filename or "{}_export_{}.xlsx".format(
             self.model.__name__.lower(), formats.date_format(timezone.now(), "Ymd_Hi")
         )
 
@@ -74,17 +74,17 @@ class ChangelistExporterModelAdminMixin(object):
             if hasattr(self, field_name):
                 try:
                     field_label = getattr(self, field_name).short_description
-                    logger.debug("{0} -> {1}".format(field_name, field_label))
+                    logger.debug(f"{field_name} -> {field_label}")
                 except AttributeError:
                     field_label = field_name
                     logger.warning(
-                        "{0} -> {1} (Setta la short description per visualizzare bene questo field_label)".format(
+                        "{} -> {} (Setta la short description per visualizzare bene questo field_label)".format(
                             field_name, field_label
                         )
                     )
             elif field_name in model_info.fields_and_pk:
                 field_label = model_class._meta.get_field(field_name).verbose_name
-                logger.debug("{0} -> {1}".format(field_name, field_label))
+                logger.debug(f"{field_name} -> {field_label}")
             elif field_name in model_info.relations:
                 field_label = model_class._meta.get_field(field_name).verbose_name
                 # ===========================================================
@@ -96,21 +96,21 @@ class ChangelistExporterModelAdminMixin(object):
                 # else:
                 #     field_label = relation_info.related_model._meta.verbose_name
                 # ===========================================================
-                logger.debug("{0} -> {1}".format(field_name, field_label))
+                logger.debug(f"{field_name} -> {field_label}")
             elif hasattr(model_class, field_name):
                 try:
                     field_label = getattr(model_class, field_name).short_description
-                    logger.debug("{0} -> {1}".format(field_name, field_label))
+                    logger.debug(f"{field_name} -> {field_label}")
                 except AttributeError:
                     field_label = field_name
                     logger.warning(
-                        "{0} -> {1} (Setta la short description per visualizzare bene questo field_label)".format(
+                        "{} -> {} (Setta la short description per visualizzare bene questo field_label)".format(
                             field_name, field_label
                         )
                     )
 
         except Exception:
-            logger.exception("Cannot find label for field {0}".format(field_name))
+            logger.exception(f"Cannot find label for field {field_name}")
         return field_label
 
     def get_csv_exporter_view(self):
@@ -152,7 +152,7 @@ class ChangelistExporterModelAdminMixin(object):
                 field_kwargs = {}
                 setattr(
                     self,
-                    "get_{field_name}".format(field_name=field_name),
+                    f"get_{field_name}",
                     self.factory_admin_function(field_name, self.model_admin),
                 )
                 return field_class, field_kwargs
@@ -160,9 +160,7 @@ class ChangelistExporterModelAdminMixin(object):
             def build_unknown_field(self, field_name, model_class):
                 if hasattr(self.model_admin, field_name):
                     return self.build_admin_field(field_name, model_class)
-                return super(_AdminCSVSerializer, self).build_unknown_field(
-                    field_name, model_class
-                )
+                return super().build_unknown_field(field_name, model_class)
 
             def build_relational_field(self, field_name, relation_info):
                 """Create fields for forward and reverse relationships."""
@@ -171,14 +169,12 @@ class ChangelistExporterModelAdminMixin(object):
                     field_kwargs = {}
                     setattr(
                         self,
-                        "get_{field_name}".format(field_name=field_name),
+                        f"get_{field_name}",
                         self.factory_relational_function(field_name, relation_info),
                     )
                     return field_class, field_kwargs
                 else:
-                    return super(_AdminCSVSerializer, self).build_relational_field(
-                        field_name, relation_info
-                    )
+                    return super().build_relational_field(field_name, relation_info)
 
         class DefaultCSVExporterView(APIFileNameMixin, generics.ListAPIView):
             model = self.model
