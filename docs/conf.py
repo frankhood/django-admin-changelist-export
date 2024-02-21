@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # complexity documentation build configuration file, created by
 # sphinx-quickstart on Tue Jul  9 22:26:36 2013.
@@ -13,7 +12,6 @@
 
 import os
 import sys
-from typing import Dict
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -49,8 +47,8 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General information about the project.
-project = u"Django Admin Changelist Export"
-copyright = u"2022, FrankHood Business Solutions srl"
+project = "Django Admin Changelist Export"
+copyright = "2022, FrankHood Business Solutions srl"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -181,7 +179,7 @@ htmlhelp_basename = "django-admin-changelist-exportdoc"
 
 # -- Options for LaTeX output --------------------------------------------------
 
-latex_elements: Dict[str, str] = {
+latex_elements: dict[str, str] = {
     # The paper size ('letterpaper' or 'a4paper').
     #'papersize': 'letterpaper',
     # The font size ('10pt', '11pt' or '12pt').
@@ -196,8 +194,8 @@ latex_documents = [
     (
         "index",
         "django-admin-changelist-export.tex",
-        u"Django Admin Changelist Export Documentation",
-        u"FrankHood Business Solutions srl",
+        "Django Admin Changelist Export Documentation",
+        "FrankHood Business Solutions srl",
         "manual",
     ),
 ]
@@ -231,8 +229,8 @@ man_pages = [
     (
         "index",
         "django-admin-changelist-export",
-        u"Django Admin Changelist Export Documentation",
-        [u"FrankHood Business Solutions srl"],
+        "Django Admin Changelist Export Documentation",
+        ["FrankHood Business Solutions srl"],
         1,
     )
 ]
@@ -250,8 +248,8 @@ texinfo_documents = [
     (
         "index",
         "django-admin-changelist-export",
-        u"Django Admin Changelist Export Documentation",
-        u"FrankHood Business Solutions srl",
+        "Django Admin Changelist Export Documentation",
+        "FrankHood Business Solutions srl",
         "django-admin-changelist-export",
         "One line description of project.",
         "Miscellaneous",

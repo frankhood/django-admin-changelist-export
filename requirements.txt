@@ -1,4 +1,4 @@
-django>=2.2
-djangorestframework>=3
+django>=3.2
+djangorestframework
 djangorestframework-csv
 drf-excel

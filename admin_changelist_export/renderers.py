@@ -1,22 +1,17 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import absolute_import, print_function, unicode_literals
-
 import csv
 import datetime
 import logging
-from io import StringIO, BytesIO
-from typing import Any, Dict
+from io import BytesIO, StringIO
+from typing import Any
 
-import django.utils.functional
-from django.utils.translation import gettext, gettext_lazy
+from django.utils.translation import gettext_lazy
 from rest_framework_csv import renderers as csv_renderers
 
 logger = logging.getLogger(__name__)
 
 
 class ExporterCSVRenderer(csv_renderers.CSVRenderer):
-    custom_headers: Dict[str, Any] = {}
+    custom_headers: dict[str, Any] = {}
     csv_delimiter = ";"
     csv_dialect = "excel"
     csv_quotechar = '"'
@@ -72,14 +67,14 @@ class XLSRenderer(csv_renderers.CSVRenderer):
         self, data, media_type=None, renderer_context=None, sheetname="Export", **kwargs
     ):
         try:
-            import xlwt
+            pass
 
             xls_buffer = BytesIO()  # create a file-like object
             if not isinstance(data, list):
                 data = [data]
 
-            header = renderer_context.get('header', self.header)
-            labels = renderer_context.get('labels', self.labels)
+            header = renderer_context.get("header", self.header)
+            labels = renderer_context.get("labels", self.labels)
             table = self.tablize(data, header=header, labels=labels)
             wb = self.to_workbook(table, sheetname=sheetname)
             wb.save(xls_buffer)
@@ -87,7 +82,7 @@ class XLSRenderer(csv_renderers.CSVRenderer):
 
         except ImportError:
             logger.error("Cannot Use XLSRenderer if xlwt is not installed!")
-            return super(XLSRenderer, self).render(
+            return super().render(
                 data, media_type=media_type, renderer_context=renderer_context, **kwargs
             )
 

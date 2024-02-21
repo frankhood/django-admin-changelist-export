@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 import os
 import re
 import sys
@@ -38,7 +37,7 @@ if sys.argv[-1] == "publish":
 
 if sys.argv[-1] == "tag":
     print("Tagging the version on git:")
-    os.system("git tag -a %s -m 'version %s'" % (version, version))
+    os.system(f"git tag -a {version} -m 'version {version}'")
     os.system("git push --tags")
     sys.exit()
 

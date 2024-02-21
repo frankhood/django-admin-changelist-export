@@ -4,10 +4,6 @@
 #
 #    pip-compile --output-file=requirements_dev.txt requirements_dev.in
 #
-asgiref==3.7.2
-    # via django
-backports-zoneinfo==0.2.1
-    # via django
 build==1.0.3
     # via zest-releaser
 bump2version==1.0.1
@@ -42,17 +38,6 @@ cryptography==41.0.4
     # via secretstorage
 distlib==0.3.7
     # via virtualenv
-django==4.2.6
-    # via
-    #   -r requirements_dev.in
-    #   djangorestframework
-djangorestframework==3.14.0
-    # via
-    #   -r requirements_dev.in
-    #   djangorestframework-csv
-    #   drf-excel
-djangorestframework-csv==2.1.1
-    # via -r requirements_dev.in
 docutils==0.20.1
     # via readme-renderer
 drf-excel==2.4.0
@@ -123,8 +108,6 @@ pyproject-api==1.6.1
     # via tox
 pyproject-hooks==1.0.0
     # via build
-pytz==2023.3.post1
-    # via djangorestframework
 pyyaml==6.0.1
     # via pre-commit
 readme-renderer[md]==42.0
@@ -144,10 +127,6 @@ rich==13.6.0
     # via twine
 secretstorage==3.3.3
     # via keyring
-six==1.16.0
-    # via djangorestframework-csv
-sqlparse==0.4.4
-    # via django
 tomli==2.0.1
     # via
     #   build
@@ -165,8 +144,6 @@ typing-extensions==4.8.0
     # via
     #   asgiref
     #   rich
-unicodecsv==0.14.1
-    # via djangorestframework-csv
 urllib3==2.0.7
     # via
     #   requests

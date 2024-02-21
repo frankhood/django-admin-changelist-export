@@ -98,7 +98,7 @@ def release(c, bumpsize=""):
     if bumpsize:
         bumpsize = "--" + bumpsize
 
-    c.run("bumpversion {bump} --no-input".format(bump=bumpsize))
+    c.run(f"bumpversion {bumpsize} --no-input")
 
     import admin_changelist_export
 

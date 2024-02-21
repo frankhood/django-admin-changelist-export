@@ -6,7 +6,7 @@ from io import StringIO
 logger = logging.getLogger(__name__)
 
 
-class CsvUnicodeWriter(object):
+class CsvUnicodeWriter:
     def __init__(self, f, dialect=csv.excel, encoding="utf-8", **kwds):
         """
         CSV writer.
@@ -47,7 +47,7 @@ class CsvUnicodeWriter(object):
             self.writerow(row)
 
 
-class UTF8Recoder(object):
+class UTF8Recoder:
     def __init__(self, f, encoding):
         """Read an encoded stream and reencodes the input to UTF-8."""
         self.reader = codecs.getreader(encoding)(f)
@@ -59,7 +59,7 @@ class UTF8Recoder(object):
         return self.reader.next().encode("utf-8")
 
 
-class CsvUnicodeReader(object):
+class CsvUnicodeReader:
     def __init__(self, f, dialect=csv.excel, encoding="utf-8", **kwargs):
         """CSV reader which will iterate over lines in the CSV file "f", which is encoded in the given encoding."""
         f = UTF8Recoder(f, encoding)
@@ -73,16 +73,16 @@ class CsvUnicodeReader(object):
         return self
 
 
-class APIFileNameMixin(object):
+class APIFileNameMixin:
     file_name: str = ""
 
     def get_file_name(self):
         return self.file_name
 
     def get(self, *args, **kwargs):
-        resp = super(APIFileNameMixin, self).get(*args, **kwargs)
+        resp = super().get(*args, **kwargs)
         file_name = self.get_file_name()
         if file_name:
             resp["Content-Disposition"] = 'attachment; filename="%s"' % file_name
-        setattr(resp.data, 'header', self.serializer_class.get_headers_labels())
+        setattr(resp.data, "header", self.serializer_class.get_headers_labels())
         return resp
